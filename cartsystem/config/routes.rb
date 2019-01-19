@@ -6,6 +6,13 @@ Rails.application.routes.draw do
           post 'purchase' => 'products#purchase'
         end
       end
+
+      resources :carts, only: [:index, :show, :create] do
+        member do
+          post 'complete' => 'carts#complete'
+          post 'add' => 'carts#add'
+        end
+      end
     end
   end
 end
