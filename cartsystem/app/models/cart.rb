@@ -53,15 +53,24 @@ class Cart < ApplicationRecord
   def add(product_id, quantity)
     return false if self.completed
 
+    # update if already in cart
+    cart_item = cart_items.find_by({ cart_id: id, product_id: product_id })
+    if cart_item
+      return false if !cart_item.can_purchase?(quantity)
+
+      cart_item.increase_quantity(quantity)
+      return true
+    end
+
     new_item = cart_items.new({
       cart_id: id, product_id: product_id, quantity: quantity
     })
 
-    return true if new_item.can_purchase? && new_item.save
+    return true if new_item.can_purchase?(quantity) && new_item.save
     false
   end
 
-  # 
+  #
   def info
     i = {total: total}
     items = {}
