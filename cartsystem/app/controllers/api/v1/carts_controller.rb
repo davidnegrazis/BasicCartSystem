@@ -43,7 +43,9 @@ module Api
       end
 
       def add
-        if cart.add(params[:product_id], params[:quantity])
+        q = params[:quantity] == nil ? 1 : params[:quantity].to_i
+
+        if q > 0 && cart.add(params[:product_id], q)
           cart.update_columns(total: cart.total_price)
 
           render json: {
@@ -55,7 +57,7 @@ module Api
         else
           render json: {
             status: 'ERROR',
-            message: "Could not add #{params[:quantity]} of product with id #{params[:product_id]} to cart",
+            message: "Could not add #{q} of product with id #{params[:product_id]} to cart",
             data: cart
           },
           status: :unprocessable_entity

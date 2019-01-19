@@ -91,7 +91,7 @@ http://localhost:3000/api/v1/carts
 ```
 http://localhost:3000/api/v1/carts/<cart_id>/add?product_id=<product_id>&quantity=<natural>
 ```
-where `quantity` is optional.
+where `quantity` is optional. If `quantity` is not passed, 1 of the item is added. `quantity` must be > 0.
 
 ##### Complete cart
 ```
