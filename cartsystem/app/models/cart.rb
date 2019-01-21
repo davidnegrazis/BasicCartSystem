@@ -13,14 +13,14 @@ class Cart < ApplicationRecord
 
   # returns the current order of the cart
   def order
-    h = {}
+    cart_order = {}
 
     cart_items.collect do |item|
-      s = { title: item.title, price: item.price, quantity: item.quantity }
-      hash[item.product_id] = s
+      item_details = { title: item.title, price: item.price, quantity: item.quantity }
+      cart_order[item.product_id] = item_details
     end
 
-    h
+    cart_order
   end
 
   def empty?
@@ -69,9 +69,10 @@ class Cart < ApplicationRecord
     new_item.can_purchase? && new_item.save
   end
 
-  #
+  # returns total price of cart and the current order of the cart in hash
+  # keys of the order items are the product_ids
   def info
-    i = {total: total}
+    cart_info = {total: total}
     items = {}
 
     cart_items.collect do |item|
@@ -83,8 +84,8 @@ class Cart < ApplicationRecord
       }
     end
 
-    i[:in_cart] = items
+    cart_info[:in_cart] = items
 
-    i
+    cart_info
   end
 end
