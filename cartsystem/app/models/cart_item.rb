@@ -23,8 +23,8 @@ class CartItem < ApplicationRecord
     product.purchase(quantity)
   end
 
+  # increases quantity by i
   def increase_quantity(i)
-    self.quantity += i
-    self.save
+    self.update_columns(quantity: quantity + i)
   end
 end

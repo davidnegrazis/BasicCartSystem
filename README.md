@@ -245,7 +245,7 @@ Now, suppose we want another product with `id` 1. If we add it to my cart again 
     "status": "SUCCESS",
     "message": "Loaded cart",
     "data": {
-        "total": "218.97",
+        "total": "234.41",
         "in_cart": {
             "1": {
                 "product_title": "Durable Wool Computer",
