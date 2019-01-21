@@ -11,18 +11,6 @@ class Cart < ApplicationRecord
     total
   end
 
-  # returns the current order of the cart
-  def order
-    cart_order = {}
-
-    cart_items.collect do |item|
-      item_details = { title: item.title, price: item.price, quantity: item.quantity }
-      cart_order[item.product_id] = item_details
-    end
-
-    cart_order
-  end
-
   def empty?
     cart_items.collect do |item|
       return false if item.quantity > 0
