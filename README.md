@@ -1,4 +1,5 @@
 ###### Designed for the Shopify summer 2019 backend intern challenge
+GitHub link: https://github.com/davidnegrazis/BasicCartSystem 
 
 1. [Overview](#overview)
 2. [Setup](#setup)
@@ -289,7 +290,7 @@ We're lucky and are able to make the purchase first by sending the POST request
 ```
 http://localhost:3000/api/v1/carts/1/complete
 ```
-which gives a success response. When the other person tries completing their cart with the same request (but using `id` 2), they get
+which gives a success response. Our cart is now completed (`completed == true`), and product inventories go down accordingly. When the other person tries completing their cart with the same request (but using `id` 2), they get
 ```js
 {
     "status": "ERROR",
