@@ -3,8 +3,7 @@ class Product < ApplicationRecord
 
   # returns true if inventory_count - n >= 0, false otherwise
   def can_purchase?(n)
-    return false if inventory_count - n < 0
-    true
+    inventory_count - n >= 0
   end
 
   # reduces inventory_count by n

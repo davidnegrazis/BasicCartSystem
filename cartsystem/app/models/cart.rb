@@ -66,8 +66,7 @@ class Cart < ApplicationRecord
       cart_id: id, product_id: product_id, quantity: quantity
     })
 
-    return true if new_item.can_purchase? && new_item.save
-    false
+    new_item.can_purchase? && new_item.save
   end
 
   #
