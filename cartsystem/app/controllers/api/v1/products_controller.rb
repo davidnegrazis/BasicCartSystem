@@ -6,7 +6,7 @@ module Api
         products ||= Product.order('id ASC')  # default
 
         render json: {
-          status: 'SUCCESS',
+          status: 200,
           message: 'Loaded products',
           data: products
         },
@@ -15,7 +15,7 @@ module Api
 
       def show
         render json: {
-          status: 'SUCCESS',
+          status: 200,
           message: 'Loaded product',
           data: product
         },
@@ -27,16 +27,16 @@ module Api
 
         if product.can_purchase?(n)
           product.purchase(n)
-          
+
           render json: {
-            status: 'SUCCESS',
+            status: 200,
             message: 'Purchased product',
             data: product
           },
           status: :ok
         else
           render json: {
-            status: 'ERROR',
+            status: 500,
             message: "Could not purchase #{n} of product",
             data: product
           },
