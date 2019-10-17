@@ -3,6 +3,7 @@
 3. [API Overview](#api-overview)
 4. [Tests](#tests)
 5. [Demo](#demo)
+    1. [Ordering](#ordering)
 
 ## Overview
 This API features the ability to get products, create a cart, add products to the cart, and purchase items/complete the cart. The database used is [MySQL](https://www.mysql.com/downloads/), and the framework used is [Ruby on Rails](https://guides.rubyonrails.org/v5.0/getting_started.html#installing-rails). Assure these are installed on your computer.
