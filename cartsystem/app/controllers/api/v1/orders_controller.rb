@@ -60,7 +60,6 @@ module Api
             def order_params
                 params.require(:order).permit(:address, :cart_id, :latitude, :longitude)
             end
-
         end
     end
 end

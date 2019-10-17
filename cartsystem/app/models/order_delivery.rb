@@ -6,12 +6,14 @@ class OrderDelivery < ApplicationRecord
     geocoded_by :address
     after_validation :geocode, :if => :address_changed?
 
+    # true if order has been delivered to dest, false otherwise
     def order_delivered?
         the_order = Order.find_by_id(self.order_id)
         return true if the_order.nil?
         the_order.delivered
     end
 
+    # true if this node is the order dest, false otherwise
     def final_point?
         if latitude.nil? || longitude.nil?
             return self.address == order.address

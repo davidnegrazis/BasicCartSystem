@@ -18,7 +18,7 @@ module Api
             # POST /order_deliveries
             def create
                 @order_delivery = OrderDelivery.new(order_delivery_params)
-                if !@order_delivery.order_delivered?
+                if @order_delivery.order_delivered?
                     render json: {
                         'alert': 'Order has already been delivered or order does not exist'
                     }, status: :bad_request

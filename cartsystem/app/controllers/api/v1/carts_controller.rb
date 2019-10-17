@@ -4,70 +4,41 @@ module Api
       def index
         carts = Cart.order('id ASC')  # default
 
-        render json: carts
-        status: :ok
+        render json: carts, status: :ok
       end
 
       def show
         info = cart.info
-        render json: {
-          message: 'Loaded cart',
-          data: info
-        },
-        status: :ok
+        render json: info, status: :ok
       end
 
       def create
         cart = Cart.new
 
         if cart.save
-          render json: {
-            message: 'Created cart',
-            data: cart
-          },
-          status: :ok
+          render json: cart, status: :ok
         else
-          render json: {
-            message: 'Cart was not created',
-            data: cart.errors
-          },
-          status: :bad_request
+          render json: cart.errors, status: :bad_request
         end
       end
 
       def add
-        quanity = params[:quantity] == nil ? 1 : params[:quantity].to_i
+        quantity = params[:quantity] == nil ? 1 : params[:quantity].to_i
 
-        if quanity > 0 && cart.add(params[:product_id], quanity)
+        if quantity > 0 && cart.add(params[:product_id], quantity)
           cart.update_columns(total: cart.total_price)
 
-          render json: {
-            message: 'Added item to cart',
-            data: cart
-          },
-          status: :ok
+          render json: cart, status: :ok
         else
-          render json: {
-            message: "Could not add #{quanity} of product with id #{params[:product_id]} to cart",
-            data: cart
-          },
-          status: :bad_request
+          render json: cart, status: :bad_request
         end
       end
 
       def complete
         if cart.complete
-          render json: {
-            message: 'Completed',
-            data: cart
-          },
-          status: :ok
+          render json: cart, status: :ok
         else
-          render json: {
-            message: "Could not complete cart; it is either completed or has an invalid number of items",
-            data: cart
-          },
-          status: :bad_request
+          render json: cart, status: :bad_request
         end
       end
 

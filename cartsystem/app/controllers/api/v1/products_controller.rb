@@ -5,19 +5,11 @@ module Api
         products = Product.where("inventory_count > ?", 0) if params[:available].to_i == 1
         products ||= Product.order('id ASC')  # default
 
-        render json: {
-          message: 'Loaded products',
-          data: products
-        },
-        status: :ok
+        render json: products, status: :ok
       end
 
       def show
-        render json: {
-          message: 'Loaded product',
-          data: product
-        },
-        status: :ok
+        render json: product, status: :ok
       end
 
       def purchase
@@ -26,17 +18,9 @@ module Api
         if product.can_purchase?(n)
           product.purchase(n)
 
-          render json: {
-            message: 'Purchased product',
-            data: product
-          },
-          status: :ok
+          render json: product, status: :ok
         else
-          render json: {
-            message: "Could not purchase #{n} of product",
-            data: product
-          },
-          status: :unprocessable_entity
+          render json: product, status: :bad_request
         end
       end
 

@@ -61,7 +61,7 @@ class Cart < ApplicationRecord
   # returns total price of cart and the current order of the cart in hash
   # keys of the order items are the product_ids
   def info
-    cart_info = {total: total}
+    cart_info = {id: id, total: total, completed: completed}
     items = {}
 
     cart_items.collect do |item|

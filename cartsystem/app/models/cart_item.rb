@@ -3,7 +3,7 @@ class CartItem < ApplicationRecord
   belongs_to :product
 
   validates :product_id, presence: true
-  validates :quanity, presence: true
+  validates :quantity, presence: true
 
   def price
     product.price
@@ -13,7 +13,7 @@ class CartItem < ApplicationRecord
     quantity * product.price
   end
 
-  # checks if the item can be purchased in quanity + i
+  # checks if the item can be purchased in quantity + i
   def can_purchase?(i = 0)
      product.can_purchase?(quantity + i)
   end

@@ -8,9 +8,8 @@ class ProductsAPITest < MiniTest::Unit::TestCase
 
   def test_get_works
     response = RestClient.get('http://localhost:3000/api/v1/products')
-    data = JSON.parse(response.body)
 
-    assert_equal 'SUCCESS', data['status']
+    assert_equal response.code, 200
   end
 
   def test_get_only_available
@@ -19,7 +18,7 @@ class ProductsAPITest < MiniTest::Unit::TestCase
     data = JSON.parse(response.body)
 
     # check if any returned products have 0 inventory_count, which is bad
-    data['data'].each do |prod|
+    data.each do |prod|
       if prod['inventory_count'] == 0
         valid = false
         break
