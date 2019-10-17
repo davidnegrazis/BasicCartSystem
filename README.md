@@ -3,7 +3,7 @@
 3. [API Overview](#api-overview)
 4. [Tests](#tests)
 5. [Demo](#demo)
-    1. [Ordering](#ordering)
+    1. [Ordering purchased products](#ordering)
 
 ## Overview
 This API features the ability to get products, create a cart, add products to the cart, and purchase items/complete the cart. The database used is [MySQL](https://www.mysql.com/downloads/), and the framework used is [Ruby on Rails](https://guides.rubyonrails.org/v5.0/getting_started.html#installing-rails). Assure these are installed on your computer.
@@ -56,7 +56,6 @@ http://localhost:3000/api/v1/carts/<cart_id>
 *Sample response*:
 ```js
 {
-{
     "total": "12761.45",
     "in_cart": {
         "1": {
@@ -91,7 +90,7 @@ http://localhost:3000/api/v1/carts
 #### PATCH
 ##### Add item to cart
 ```
-http://localhost:3000/api/v1/carts/<cart_id>/add?product_id=<product_id>&quantity=<natural>
+http://localhost:3000/api/v1/carts/<cart_id>/add
 ```
 with body
 ```
@@ -196,10 +195,20 @@ we get
 ```
 Let's add the product with `id` 1 to our cart, then product with `id` 2, using the following POST requests:
 ```
-http://localhost:3000/api/v1/carts/1/add?product_id=1
+http://localhost:3000/api/v1/carts/1/add
+```
+```
+{
+    "product_id": 1
+}
 ```
 ```
 http://localhost:3000/api/v1/carts/1/add?product_id=2
+```
+```
+{
+    "product_id": 2
+}
 ```
 Let's check up on the cart now by sending the GET request
 ```
@@ -248,7 +257,13 @@ Now, suppose we want another product with `id` 1. If we add it to my cart again 
 
 We're done! Now, the other person loves Durable Wool Computers, so they want to buy all 199 of them! They'll send the post request
 ```
-http://localhost:3000/api/v1/carts/2/add?product_id=1&quantity=199
+http://localhost:3000/api/v1/carts/2/add
+```
+```
+{
+    "product_id": 1,
+    "quantity": 199
+}
 ```
 and get
 ```js
