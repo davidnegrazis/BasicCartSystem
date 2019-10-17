@@ -1,5 +1,6 @@
 class Cart < ApplicationRecord
   has_many :cart_items
+  belongs_to :order
 
   # price of all unit prices of items times their quantities
   def total_price

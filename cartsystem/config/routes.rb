@@ -13,6 +13,8 @@ Rails.application.routes.draw do
           post 'add' => 'carts#add'
         end
       end
+
+      resources :orders
     end
   end
 end

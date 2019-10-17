@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  delivery_address: MyText
+  delivery_lat: 1.5
+  delivery_long: 1.5
+  cart_id: 1
+
+two:
+  delivery_address: MyText
+  delivery_lat: 1.5
+  delivery_long: 1.5
+  cart_id: 1
