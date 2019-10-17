@@ -4,10 +4,7 @@ module Api
       def index
         carts = Cart.order('id ASC')  # default
 
-        render json: {
-          message: 'Loaded carts',
-          data: carts
-        },
+        render json: carts
         status: :ok
       end
 
@@ -34,7 +31,7 @@ module Api
             message: 'Cart was not created',
             data: cart.errors
           },
-          status: :unprocessable_entity
+          status: :bad_request
         end
       end
 
@@ -54,7 +51,7 @@ module Api
             message: "Could not add #{quanity} of product with id #{params[:product_id]} to cart",
             data: cart
           },
-          status: :unprocessable_entity
+          status: :bad_request
         end
       end
 
@@ -70,7 +67,7 @@ module Api
             message: "Could not complete cart; it is either completed or has an invalid number of items",
             data: cart
           },
-          status: :unprocessable_entity
+          status: :bad_request
         end
       end
 

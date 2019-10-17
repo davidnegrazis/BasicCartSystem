@@ -29,6 +29,16 @@ ActiveRecord::Schema.define(version: 2019_10_17_015411) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "order_deliveries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.text "address"
+    t.float "latitude"
+    t.float "longitude"
+    t.bigint "order_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_order_deliveries_on_order_id"
+  end
+
   create_table "orders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "address"
     t.float "latitude"
@@ -50,5 +60,6 @@ ActiveRecord::Schema.define(version: 2019_10_17_015411) do
 
   add_foreign_key "cart_items", "carts"
   add_foreign_key "cart_items", "products"
+  add_foreign_key "order_deliveries", "orders"
   add_foreign_key "orders", "carts"
 end

@@ -1,6 +1,5 @@
 class Cart < ApplicationRecord
   has_many :cart_items
-  belongs_to :order
 
   # price of all unit prices of items times their quantities
   def total_price
@@ -40,6 +39,7 @@ class Cart < ApplicationRecord
   # adds an item to the cart (i.e. creates a new item related to the cart)
   # returns true if successful, false otherwise
   def add(product_id, quantity)
+    return false if product_id.nil?
     return false if self.completed
 
     # update if already in cart

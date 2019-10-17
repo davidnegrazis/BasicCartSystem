@@ -1,41 +1,53 @@
 module Api
     module V1  # version 1 of API
         class OrdersController < ApplicationController
-            before_action :set_order, only: [:show, :update, :destroy]
+            before_action :set_order, only: [:show, :update, :destroy, :nodes]
 
             # GET /orders
             def index
-              @orders = Order.all
+                @orders = Order.all
 
-              render json: @orders, status: :ok
+                render json: @orders, status: :ok
             end
 
             # GET /orders/1
             def show
-              render json: @order, status: :ok
+                render json: @order, status: :ok
             end
 
             # POST /orders
             def create
-              @order = Order.new(order_params)
+                @order = Order.new(order_params)
 
-              if @order.save
-                render json: @order, status: :created
-              else
-                render json: @order.errors, status: :unprocessable_entity
-              end
+                if !@order.can_order_cart?
+                    render json: {
+                        'alert': 'Cart has not been purchased yet or cart does not exist'
+                    }, status: :bad_request
+
+                    return
+                end
+
+                if @order.save
+                    render json: @order, status: :created
+                else
+                    render json: @order.errors, status: :unprocessable_entity
+                end
             end
 
             def update
-              if @order.update(order_params)
-                render json: @order
-              else
-                render json: @order.errors, status: :unprocessable_entity
-              end
+                if @order.update(order_params)
+                    render json: @order
+                else
+                    render json: @order.errors, status: :unprocessable_entity
+                end
             end
 
             def destroy
-              @order.destroy
+                @order.destroy
+            end
+
+            def nodes
+                render json: @order.delivery_nodes, status: :ok
             end
 
             private
